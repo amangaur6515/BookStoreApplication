@@ -1,0 +1,39 @@
+﻿@model List<Event>
+<div class="container">
+    <div class="row">
+        
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead>
+
+                        <tr>
+                            <th>Title</th>
+             
+                            <th>Action</th>
+                        </tr>
+
+
+                    </thead>
+                    <tbody>
+                        @foreach (var obj in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-route-id="@obj.Id" asp-controller="Event" asp-action="EventDetails">@obj.Title</a>
+                                </td>
+                                
+                                <td>
+                                     <a asp-route-id="@obj.Id" asp-controller="Event" asp-action="EditEvent" class="btn btn-warning mb-1">Edit</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+            
+        
+        
+    </div>
+
+</div>

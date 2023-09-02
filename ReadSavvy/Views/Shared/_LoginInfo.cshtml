@@ -1,0 +1,38 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+
+@if (_signInManager.IsSignedIn(User))
+{
+
+    if (User.IsInRole("Admin"))
+    {
+        <li>
+            <a class="navbar-text">Hello! @User.Identity.Name</a>
+            <a class="btn btn-outline-primary" asp-controller="Event" asp-action="ListAllEvents">All Events</a>
+            
+            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Logout">Logout</a>
+
+        </li>
+    }
+    else
+    {
+        <li>
+            <a class="navbar-text">Hello! @User.Identity.Name</a>
+            <a class="btn btn-outline-primary" asp-controller="Event" asp-action="Index">My Invitations</a>
+            <a class="btn btn-outline-primary" asp-controller="Event" asp-action="MyEvents">My Events</a>
+            <a class="btn btn-outline-primary" asp-controller="Event" asp-action="AddEvent">Create Event</a>
+            <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Logout">Logout</a>
+
+        </li>
+    }
+    
+}
+
+else
+{
+    <li>
+
+        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Login">Login</a>
+        <a class="btn btn-outline-primary" asp-controller="Home" asp-action="Register">Register</a>
+    </li>
+
+}

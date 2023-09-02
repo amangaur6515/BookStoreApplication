@@ -1,0 +1,68 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@model IEnumerable<Event>
+
+
+<div class="text-center">
+    <div class="row">
+        <div class="col col-sm-6">
+            <h4>
+                Upcoming Events
+            </h4>
+            <table class="table table-responsive  table-bordered table-hover">
+                <thead class="bg-primary">
+                <th>Title</th>
+                <th>Date</th>
+                <th>Type</th>
+                </thead>
+                <tbody>
+                    @foreach (Event obj in Model)
+                    {
+                        if (obj.Date > DateTime.Now && obj.Type == "Public")
+                        {
+                            <tr>
+                                <td><a asp-route-id="@obj.Id" asp-controller="Event" asp-action="EventDetails">@obj.Title</a></td>
+                                <td>@obj.Date.ToString("d")</td>
+                                <td>@obj.Type</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col col-sm-6">
+            <h4>
+                Past Events
+            </h4>
+            <table class="table table-responsive  table-bordered table-hover">
+                <thead class="bg-primary">
+                    <th>Title</th>
+                    <th>Date</th>
+                    <th>Type</th>
+                </thead>
+                <tbody>
+                    @foreach (Event obj in Model)
+                    {
+                        if (obj.Date < DateTime.Now && obj.Type == "Public")
+                        {
+                            <tr>
+                                <td>
+                                    <a asp-route-id="@obj.Id" asp-controller="Event" asp-action="EventDetails">@obj.Title</a>
+
+                                </td>
+                                <td>@obj.Date.ToString("d")</td>
+                                <td>@obj.Type</td>
+                            </tr>
+                        }
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>

@@ -1,0 +1,25 @@
+﻿@model User
+
+
+<div class="text-center">
+
+    <form method="post" class="form-signin">
+
+        <img src="~/images/images.png" width="50" height="50">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <h1 class="h3 mb-3 font-weight-normal">Please Register</h1>
+        <label asp-for="FullName" class="sr-only">Full Name</label>
+        <input asp-for="FullName" type="text" class="form-control" placeholder="Full Name" required autofocus>
+        <span asp-validation-for="FullName" class="text-danger"></span>
+        <label asp-for="Email" class="sr-only">Email address</label>
+        <input asp-for="Email" type="email" class="form-control" placeholder="Email address" required autofocus>
+        <span asp-validation-for="FullName" class="text-danger"></span>
+        <label asp-for="Password" class="sr-only">Password</label>
+        <input asp-for="Password" type="password" class="form-control" placeholder="Password" required>
+        <span asp-validation-for="FullName" class="text-danger"></span>
+
+        <button asp-controller="Home" asp-action="Register" class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+
+    </form>
+    <p>Click <a asp-controller="Home" asp-action="Login">here</a> to login</p>
+</div>

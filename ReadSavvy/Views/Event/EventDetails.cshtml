@@ -1,0 +1,57 @@
+﻿@model EventDetailsCommentViewModel
+
+@{
+    var emailList = Model.Event.InviteByEmail.Split(",");
+    int len = emailList.Length;
+
+
+
+}
+<partial name="_Notification"></partial>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h4 class="card-title">Title: @Model.Event.Title</h4>
+                    <p class="card-text"><b>Date:</b> @Model.Event.Date.ToString("d")</p>
+                    <p class="card-text"><b>Location:</b> @Model.Event.Location</p>
+                    <p class="card-text"><b>Start Time:</b> @(Model.Event.StartTime + ":00")</p>
+                    <p class="card-text"><b>Duration in hours:</b> @Model.Event.Duration</p>
+                    <p class="card-text"><b>Description:</b> @Model.Event.Description</p>
+                    <p class="card-text"><b>Other Details:</b> @Model.Event.OtherDetails</p>
+                    <p class="card-text"><b>Total invited to event:</b> @len</p>
+                    <p class="card-text"><b>Location:</b> @Model.Event.Location</p>
+                    <form method="post">
+                        <div class="form-group">
+                            <label asp-for="Comment.CommentText"><b>Add Comment:</b></label>
+                            <input asp-for="Comment.CommentText" type="text" required/>
+                            <input asp-for="Event.Id" value="@Model.Event.Id" hidden/>
+                            
+                            
+                        </div>
+                        <div class="form-group">
+                            <button asp-controller="Event" asp-action="AddComment" class="btn btn-primary">Post</button>
+                        </div>
+                    </form>
+                    <br />
+                    <p class="card-text">
+                        <b>Past Comments:</b> <br />
+                        @foreach(Comment obj in Model.Comments)
+                        {
+                            if (obj.EventId == Model.Event.Id)
+                            {
+                                <br />@obj.Author <span>:</span> @obj.CommentText
+                                 
+                            }
+                        }
+                    </p>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

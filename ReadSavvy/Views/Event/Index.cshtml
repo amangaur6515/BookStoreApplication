@@ -1,0 +1,47 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUser> _signInManager
+@model IEnumerable<Event>
+@{
+    List<int> eventIds = new List<int>();
+    foreach (var obj in Model)
+    {
+        var emailList = obj.InviteByEmail.Split(',');
+        if (emailList.Contains(User.Identity.Name))
+        {
+            eventIds.Add(obj.Id);
+        }
+    }
+
+
+}
+<div>
+    <h1>My Invitations</h1>
+    <table class="table table-hover  table-responsive ">
+        <thead class="table-primary bg-primary">
+            <tr>
+                <th>Title</th>
+                
+            </tr>
+
+        </thead>
+        <tbody>
+
+            @foreach (var obj in Model)
+            {
+                if (eventIds.Contains(obj.Id))
+                {
+                    <tr>
+                        <td>
+                            <a asp-route-id="@obj.Id" asp-controller="Event" asp-action="EventDetails">@obj.Title</a>
+                         </td>
+                        
+
+                    </tr>
+                }
+
+            }
+
+        </tbody>
+    </table>
+</div>
+
+
